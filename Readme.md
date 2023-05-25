@@ -1,6 +1,4 @@
-# css [![Build Status](https://travis-ci.org/reworkcss/css.svg?branch=master)](https://travis-ci.org/reworkcss/css)
-
-CSS parser / stringifier.
+CSS parser & stringifier.
 
 ## Installation
 
@@ -235,6 +233,22 @@ The `@page` at-rule.
 The `@supports` at-rule.
 
 - supports: `String`. The part following `@supports `.
+- rules: `Array` of nodes with the types `rule`, `comment` and any of the
+  at-rule types.
+
+#### container
+
+The `@container` at-rule.
+
+- container: `String`. The part following `@container `.
+- rules: `Array` of nodes with the types `rule`, `comment` and any of the
+  at-rule types.
+
+#### layer
+
+The `@layer` at-rule.
+
+- layer: `String`. The part following `@layer `.
 - rules: `Array` of nodes with the types `rule`, `comment` and any of the
   at-rule types.
 
