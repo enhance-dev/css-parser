@@ -2,7 +2,7 @@ CSS parser & stringifier.
 
 ## Installation
 
-    $ npm install css
+`npm install @enhance/css-parser`
 
 ## Usage
 
@@ -240,17 +240,24 @@ The `@supports` at-rule.
 
 The `@container` at-rule.
 
-- container: `String`. The part following `@container `.
+- type: `String` container
+- container: `String` container query
 - rules: `Array` of nodes with the types `rule`, `comment` and any of the
-  at-rule types.
+    - selectors: `Array` of `String`s. The list of selectors of the rule, split
+      on commas. Each selector is trimmed from whitespace and comments.
+    - declarations: `Array` of nodes with the types `declaration` and `comment`.
 
 #### layer
 
 The `@layer` at-rule.
 
-- layer: `String`. The part following `@layer `.
+- type: `String`, layer
+- layer: `String` the layer name
 - rules: `Array` of nodes with the types `rule`, `comment` and any of the
-  at-rule types.
+    - selectors: `Array` of `String`s. The list of selectors of the rule, split
+      on commas. Each selector is trimmed from whitespace and comments.
+    - declarations: `Array` of nodes with the types `declaration` and `comment`.
+
 
 ### Example
 
