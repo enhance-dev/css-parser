@@ -1,41 +1,55 @@
 name: Node CI
 
-# Push tests commits; pull_request tests PR merges
-on: [ push, pull_request ]
+# Push tests pushes; PR tests merges
+on: [push, pull_request]
 
 defaults:
   run:
     shell: bash
 
 jobs:
-  setup:
+  # Test the build
+  build:
     # Setup
     runs-on: ubuntu-latest
 
+    # Go
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
-        with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org/
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://registry.npmjs.org/
 
-  test:
-    steps:
-      - name: Run Tests
+      - name: Install
+        run: npm install
+
+      - name: Test
         run: npm test
         env:
           CI: true
 
-
-  # Publish to package registries
+  # Assuming all that went fine (and it's main): deploy!
   publish:
-    if: startsWith(github.ref, 'refs/tags/v')
+    # Setup
+    needs: build
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+
+    # Go
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install
+        run: npm i
 
       # Publish to npm
       - name: Publish @RC to npm
