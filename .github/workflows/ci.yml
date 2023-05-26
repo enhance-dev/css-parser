@@ -35,7 +35,6 @@ jobs:
 
   # Publish to package registries
   publish:
-    # ----- Only git tag package publishing beyond this point ----- #
     if: startsWith(github.ref, 'refs/tags/v')
 
       # Publish to npm
